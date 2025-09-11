@@ -29,6 +29,8 @@ notesController.createNewNote = async (req, res) => {
         // Creamos una nueva instancia de Note con los datos proporcionados
         const newNote = new Note({ title, description });
 
+        newNote.user = req.user.id; // Asignamos el ID del usuario autenticado a la nota
+
         // Guardamos la nueva nota en la base de datos
         await newNote.save();
 
@@ -51,7 +53,7 @@ notesController.createNewNote = async (req, res) => {
 notesController.renderNotes = async (req, res) => {
     try {
         // Obtenemos todas las notas de la base de datos y las convertimos a formato JSON
-        const notes = await Note.find().lean();
+        const notes = await Note.find({user: req.user.id}).sort({ createdAt: 'desc' }).lean();
 
         // Renderizamos la vista 'all-notes' pasando las notas obtenidas
         res.render('notes/all-notes', { notes });
@@ -70,6 +72,11 @@ notesController.renderNotes = async (req, res) => {
  */
 notesController.renderEditForm = async (req, res) => {
     const note = await Note.findById(req.params.id).lean();
+    if (note.user != req.user.id) {
+        req.flash('error_msg', 'No tienes permiso para editar esta nota');
+        // Redirigimos al usuario a la lista de notas
+        res.redirect('/notas');
+    }
     res.render('notes/edit-notes', {note});
 };
 

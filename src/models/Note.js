@@ -22,6 +22,10 @@ const NoteSchema = new Schema({
         required: [true, 'La descripción es obligatoria.'],
         trim: true,
         maxlength: [500, 'La descripción no puede tener más de 500 caracteres.'] 
+    },
+    user: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true // Mongoose añadirá automáticamente 'createdAt' y 'updatedAt'

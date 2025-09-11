@@ -35,8 +35,8 @@ usersController.signup = async (req, res) => {
     if (password !== confirm_password) {
         errors.push({ text: 'Las contraseñas no coinciden' });
     }
-    if (password.length < 6 || password.length > 20) {
-        errors.push({ text: 'Las contraseñas deben tener entre 6 y 20 caracteres' });
+    if (password.length < 8 || password.length > 20) {
+        errors.push({ text: 'Las contraseñas deben tener entre 8 y 20 caracteres' });
     }
 
     if (errors.length > 0) {
@@ -71,12 +71,17 @@ usersController.signup = async (req, res) => {
          * - Asegúrate de aplicar hash a la contraseña antes de guardarla en la base de datos.
          * - Valida y sanitiza los datos de entrada para evitar inyecciones y otros ataques.
          */
+        // Crear el nuevo usuario sin establecer la contraseña aún
         const newUser = new User({
             name: name.trim(),
-            email: email.toLowerCase().trim(),
-            password: '' // Se establecerá después de aplicar hash
+            email: email.toLowerCase().trim()
         });
-        newUser.password = await newUser.encryptPassword(password);
+        
+        // Encriptar y establecer la contraseña
+        const hashedPassword = await newUser.encryptPassword(password);
+        newUser.password = hashedPassword;
+        
+        // Guardar el usuario
         await newUser.save();
 
         req.flash('success_msg', 'Usuario registrado correctamente');

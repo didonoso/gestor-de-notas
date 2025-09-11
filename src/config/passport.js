@@ -13,18 +13,23 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
 }, async (email, password, done) => {
     try {
-        // Buscar usuario por correo electrónico
-        const user = await User.findOne({ email });
+        // Buscar usuario por correo electrónico usando el método estático que incluye la contraseña
+        const user = await User.findByEmailWithPassword(email);
         
         // Si no existe el usuario, retornar mensaje de error
         if (!user) {
             return done(null, false, { message: 'Correo electrónico no existe en el sistema.' });
         }
-        
+
         // Verificar contraseña
-        const isMatch = await user.matchPassword(password);
-        if (!isMatch) {
-            return done(null, false, { message: 'La contraseña ingresada no es correcta. Intente nuevamente.' });
+        try {
+            const isMatch = await user.matchPassword(password);            
+            if (!isMatch) {
+                return done(null, false, { message: 'La contraseña ingresada no es correcta. Intente nuevamente.' });
+            }
+        } catch (pwError) {
+            console.error('Error verificando contraseña:', pwError);
+            return done(null, false, { message: 'Error verificando credenciales: ' + pwError.message });
         }
         
         // Autenticación exitosa

@@ -15,7 +15,7 @@ const {
     renderSigninForm, 
     signup, 
     signin, 
-    logout 
+    logout
 } = require('../controllers/users.controller');
 
 /**

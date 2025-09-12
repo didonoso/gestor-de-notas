@@ -1,48 +1,137 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+{{!-- 
+  Barra de navegación mejorada con diseño moderno y profesional
+  - Gradiente de color llamativo en la barra
+  - Efectos de hover suaves en los enlaces
+  - Adaptativo para dispositivos móviles y pantallas grandes
+  - Iconos mejorados y visuales llamativos
+--}}
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-lg" style="background: linear-gradient(135deg, #4e73df 0%, #6f42c1 100%);">
   <div class="container">
-    <!-- Logo con icono de carrito de compras -->
-    <a class="navbar-brand" href="/">
-      <i class="fas fa-cart-plus"></i> MULTIGESTOR
+    <!-- Logo con icono mejorado y efecto de brillo -->
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="/">
+      <div class="logo-icon me-2 d-flex align-items-center justify-content-center">
+        <i class="fas fa-cart-plus fa-lg"></i>
+      </div>
+      <span class="brand-text">MULTIGESTOR</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler border-0 shadow-sm" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       {{#if user}}
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+          <a class="nav-link menu-link active" aria-current="page" href="/">
+            <i class="fas fa-home me-1"></i> Inicio
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/faq">F.A.Q</a>
+          <a class="nav-link menu-link" href="/faq">
+            <i class="fas fa-question-circle me-1"></i> F.A.Q
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/productos">Productos</a>
+          <a class="nav-link menu-link" href="/productos">
+            <i class="fas fa-box me-1"></i> Productos
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/notas">Mis Notas</a>
+          <a class="nav-link menu-link" href="/notas">
+            <i class="fas fa-clipboard-list me-1"></i> Mis Notas
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contacto">Contacto</a>
+          <a class="nav-link menu-link" href="/contacto">
+            <i class="fas fa-envelope me-1"></i> Contacto
+          </a>
         </li>
       </ul>
-      <!-- Botón Salir alineado a la derecha -->
+      <!-- Botón Salir alineado a la derecha con efecto hover -->
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/usuarios/salir">Salir</a>
+          <a class="nav-link menu-link btn-exit" href="/usuarios/salir">
+            <i class="fas fa-sign-out-alt me-1"></i> Salir
+          </a>
         </li>
       </ul>
       {{else}}
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/usuarios/ingreso">Ingreso</a>
+          <a class="nav-link menu-link" href="/usuarios/ingreso">
+            <i class="fas fa-sign-in-alt me-1"></i> Ingreso
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/usuarios/registro">Registro</a>
+          <a class="nav-link menu-link btn-register" href="/usuarios/registro">
+            <i class="fas fa-user-plus me-1"></i> Registro
+          </a>
         </li>
       </ul>
       {{/if}}
-
     </div>
   </div>
 </nav>
+
+<!-- Estilos específicos para la barra de navegación -->
+<style>
+  /* Efecto para el logo */
+  .logo-icon {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-brand:hover .logo-icon {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .brand-text {
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Efecto para los enlaces del menú */
+  .menu-link {
+    position: relative;
+    margin: 0 3px;
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .menu-link:hover, .menu-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* Efecto especial para el botón de salir */
+  .btn-exit:hover {
+    background-color: rgba(220, 53, 69, 0.2);
+  }
+  
+  /* Efecto especial para el botón de registro */
+  .btn-register {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+  .btn-register:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+  
+  /* Mejoras responsivas */
+  @media (max-width: 992px) {
+    .menu-link {
+      padding: 0.6rem 0.8rem;
+      margin: 2px 0;
+    }
+    
+    .navbar-collapse {
+      padding: 1rem 0;
+    }
+  }
+</style>

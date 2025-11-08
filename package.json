@@ -1,4 +1,10 @@
 {
+  "name": "gestor-de-notas",
+  "version": "1.0.0",
+  "description": "Aplicación web para gestionar notas personales de forma segura",
+  "main": "src/index.js",
+  "author": "Diego Donoso Vera",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.12.0",
     "bcryptjs": "^2.4.3",

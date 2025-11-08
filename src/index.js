@@ -1,5 +1,5 @@
 /**
- * @fileoverview Punto de entrada principal de la aplicación Gestor de Productos
+ * @fileoverview Punto de entrada principal de la aplicación Gestor de Notas
  * Inicia el servidor y establece la conexión a la base de datos
  * @version 1.0.0
  */

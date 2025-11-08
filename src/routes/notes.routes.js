@@ -1,5 +1,5 @@
 /**
- * @fileoverview Configuración de rutas para la gestión de notas/productos
+ * @fileoverview Configuración de rutas para la gestión de notas
  * Maneja todas las operaciones CRUD para las notas de los usuarios
  * @module routes/notes
  * @version 1.0.0
@@ -36,7 +36,7 @@ router.use('/notas', isAuthenticated);
  * Ruta para renderizar el formulario de agregar una nueva nota
  * @route GET /notas/agregar
  * @access Private
- * @description Renderiza un formulario para agregar una nueva nota o producto
+ * @description Renderiza un formulario para agregar una nueva nota
  */
 router.get('/notas/agregar', renderNoteForm);
 

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Configuración principal del servidor Express para la aplicación de Gestor de Productos.
+ * @fileoverview Configuración principal del servidor Express para la aplicación Gestor de Notas.
  * @version 1.0.0
  */
 

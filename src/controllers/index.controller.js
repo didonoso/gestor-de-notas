@@ -79,8 +79,8 @@ indexController.renderFaq = (req, res, next) => {
             currentYear: new Date().getFullYear(),
             faqCategories: [
                 'General',
-                'Productos',
-                'Servicios',
+                'Cuenta',
+                'Notas',
                 'Soporte'
             ]
         };

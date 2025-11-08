@@ -16,7 +16,7 @@ const { isAuthenticated } = require('../helpers/auth');
  * Ruta principal del sitio web
  * @route GET /
  * @access Public - No requiere autenticación
- * @description Renderiza la página principal/landing page del gestor de productos
+ * @description Renderiza la página principal/landing page del gestor de notas
  */
 router.get('/', renderIndex);
 

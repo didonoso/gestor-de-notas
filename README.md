@@ -1,13 +1,13 @@
-# Gestor de Productos para el Hogar
+# Gestor de Notas Personal
 
 ![Logo del Proyecto](https://i.ibb.co/Qv6FMhZ5/Captura-de-pantalla-2025-09-11-210320.png)
 
-Este proyecto es una aplicación web robusta y optimizada para gestionar y organizar productos necesarios para el hogar. Permite a los usuarios crear cuentas seguras, iniciar sesión con autenticación avanzada y administrar sus propias listas de compras. Cada usuario tiene acceso a sus propias "notas", donde puede seleccionar productos desde una lista predefinida y llevar un registro de los artículos que necesita comprar. La aplicación cuenta con un sistema completo de registro de actividades, validación avanzada y medidas de seguridad implementadas siguiendo las mejores prácticas del desarrollo web moderno.
+Este proyecto es una aplicación web robusta y optimizada para gestionar y organizar notas personales. Permite a los usuarios crear cuentas seguras, iniciar sesión con autenticación avanzada y administrar sus propias notas. Cada usuario tiene acceso a sus propias notas donde puede crear, editar y eliminar contenido de forma segura y privada. La aplicación cuenta con un sistema completo de registro de actividades, validación avanzada y medidas de seguridad implementadas siguiendo las mejores prácticas del desarrollo web moderno.
 
 ## Tecnologías utilizadas
 
 - **Node.js**: Backend construido con Node.js, proporcionando una estructura eficiente y escalable para manejar las solicitudes del usuario y la lógica de la aplicación.
-- **MongoDB**: Base de datos NoSQL utilizada para almacenar de forma flexible los datos de los usuarios, notas y productos seleccionados.
+- **MongoDB**: Base de datos NoSQL utilizada para almacenar de forma flexible los datos de los usuarios y sus notas.
 - **Mongoose**: ODM avanzado para MongoDB con validación, middleware y hooks para optimizar las operaciones de la base de datos.
 - **Express.js**: Framework para Node.js, utilizado para gestionar las rutas y facilitar la creación del servidor.
 - **HTML, CSS y JavaScript**: Tecnologías utilizadas para el frontend y la interfaz de usuario.
@@ -60,9 +60,8 @@ El proyecto utiliza los siguientes módulos de npm para gestionar las funcionali
 - **Sistema de roles**: Estructura preparada para diferentes niveles de acceso (usuario, admin) para futuras expansiones.
 
 ### Funcionalidad de Notas
-- **Notas personalizadas**: Cada usuario puede crear y editar notas con productos seleccionados desde una lista categorizada de productos necesarios para el hogar.
-- **Selección de productos**: Una lista de productos predefinidos permite seleccionar los artículos que el usuario desea agregar a sus notas.
-- **Búsqueda y filtrado**: Capacidad para buscar y filtrar notas por título, fecha o estado.
+- **Notas personalizadas**: Cada usuario puede crear y editar notas con título y descripción personalizados.
+- **Búsqueda y filtrado**: Capacidad para buscar y filtrar notas por título, fecha o contenido.
 - **Ordenamiento inteligente**: Las notas pueden organizarse cronológicamente o por prioridad.
 - **Paginación**: Sistema de paginación eficiente para manejar grandes cantidades de notas.
 
@@ -128,7 +127,7 @@ Antes de ejecutar el proyecto, es necesario configurar las variables de entorno.
     # Configuración de la base de datos MongoDB
     MULTIGESTOR_MONGODB_HOST=127.0.0.1
     MULTIGESTOR_MONGODB_PORT=27017
-    MULTIGESTOR_MONGODB_DATABASE=gestor-de-productos
+    MULTIGESTOR_MONGODB_DATABASE=gestor-de-notas
 
     # Configuración de seguridad
     # Nota: En producción, usar una cadena segura y aleatoria para SESSION_SECRET

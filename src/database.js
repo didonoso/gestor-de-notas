@@ -9,19 +9,35 @@ const mongoose = require('mongoose');
 /**
  * Configuración de la conexión a MongoDB
  * Obtiene los parámetros de conexión desde variables de entorno
+ * Soporta tanto MongoDB local como MongoDB Atlas (producción)
  */
 const {
   MULTIGESTOR_MONGODB_HOST,
   MULTIGESTOR_MONGODB_PORT,
   MULTIGESTOR_MONGODB_DATABASE,
   MONGODB_USER,
-  MONGODB_PASSWORD
+  MONGODB_PASSWORD,
+  MONGODB_URI // Para MongoDB Atlas en producción
 } = process.env;
 
-// Construye la URI de conexión basada en si hay credenciales configuradas
-const MONGODB_URI = MONGODB_USER && MONGODB_PASSWORD
-  ? `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MULTIGESTOR_MONGODB_HOST}:${MULTIGESTOR_MONGODB_PORT}/${MULTIGESTOR_MONGODB_DATABASE}`
-  : `mongodb://${MULTIGESTOR_MONGODB_HOST}:${MULTIGESTOR_MONGODB_PORT}/${MULTIGESTOR_MONGODB_DATABASE}`;
+// Construye la URI de conexión
+// 1. Si existe MONGODB_URI (Atlas), usarlo directamente
+// 2. Si hay credenciales, construir URI con autenticación
+// 3. Si no, usar conexión local sin autenticación
+let connectionString;
+
+if (MONGODB_URI) {
+  // MongoDB Atlas (producción)
+  connectionString = MONGODB_URI;
+} else if (MONGODB_USER && MONGODB_PASSWORD) {
+  // MongoDB local con autenticación
+  connectionString = `mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MULTIGESTOR_MONGODB_HOST}:${MULTIGESTOR_MONGODB_PORT}/${MULTIGESTOR_MONGODB_DATABASE}`;
+} else {
+  // MongoDB local sin autenticación (desarrollo)
+  connectionString = `mongodb://${MULTIGESTOR_MONGODB_HOST}:${MULTIGESTOR_MONGODB_PORT}/${MULTIGESTOR_MONGODB_DATABASE}`;
+}
+
+const DB_URI = connectionString;
 
 /**
  * Función asíncrona para establecer la conexión con MongoDB
@@ -36,7 +52,7 @@ async function connectDB() {
     };
 
     // Conectar a la base de datos
-    await mongoose.connect(MONGODB_URI, options);
+    await mongoose.connect(DB_URI, options);
 
     // Evento de conexión exitosa
     mongoose.connection.on('connected', () => {

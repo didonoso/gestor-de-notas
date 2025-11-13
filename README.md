@@ -1,6 +1,6 @@
 # Gestor de Notas Personal
 
-![Logo del Proyecto](https://i.ibb.co/Qv6FMhZ5/Captura-de-pantalla-2025-09-11-210320.png)
+![Logo del Proyecto](https://i.ibb.co/sJqMR5cZ/Captura-de-pantalla-2025-11-13-024500.png)
 
 Este proyecto es una aplicación web robusta y optimizada para gestionar y organizar notas personales. Permite a los usuarios crear cuentas seguras, iniciar sesión con autenticación avanzada y administrar sus propias notas. Cada usuario tiene acceso a sus propias notas donde puede crear, editar y eliminar contenido de forma segura y privada. La aplicación cuenta con un sistema completo de registro de actividades, validación avanzada y medidas de seguridad implementadas siguiendo las mejores prácticas del desarrollo web moderno.
 

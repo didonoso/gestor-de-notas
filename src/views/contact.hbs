@@ -1,0 +1,300 @@
+{{!-- 
+  Vista de Contacto
+  Formulario profesional para que los usuarios envíen mensajes
+--}}
+
+<div class="container-fluid py-5">
+  {{!-- Cabecera --}}
+  <div class="row mb-5">
+    <div class="col-12 text-center">
+      <div class="position-relative d-inline-block mb-4">
+        <h1 class="display-4 fw-bold text-primary position-relative z-2">Contáctanos</h1>
+        <div class="position-absolute bg-primary opacity-10 rounded-pill" style="width: 100%; height: 20px; bottom: 0; left: 0; z-index: 1;"></div>
+      </div>
+      <p class="lead text-muted col-lg-8 mx-auto">
+        ¿Tienes alguna pregunta, sugerencia o necesitas ayuda? Estamos aquí para ayudarte. 
+        Completa el formulario y te responderemos lo antes posible.
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    {{!-- Información de contacto --}}
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body p-4">
+          <h4 class="card-title mb-4 text-primary">
+            <i class="fas fa-info-circle me-2"></i>Información de Contacto
+          </h4>
+          
+          <div class="mb-4">
+            <div class="d-flex align-items-start mb-3">
+              <div class="bg-primary bg-opacity-10 rounded-circle p-3 me-3">
+                <i class="fas fa-envelope text-primary fa-lg"></i>
+              </div>
+              <div>
+                <h6 class="mb-1 fw-bold">Correo Electrónico</h6>
+                <a href="mailto:diegoignaciodonosovera@gmail.com" class="text-muted text-decoration-none">
+                  diegoignaciodonosovera@gmail.com
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="d-flex align-items-start mb-3">
+              <div class="bg-success bg-opacity-10 rounded-circle p-3 me-3">
+                <i class="fas fa-clock text-success fa-lg"></i>
+              </div>
+              <div>
+                <h6 class="mb-1 fw-bold">Horario de Atención</h6>
+                <p class="text-muted mb-0">Lunes a Viernes<br>9:00 AM - 6:00 PM</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="d-flex align-items-start">
+              <div class="bg-info bg-opacity-10 rounded-circle p-3 me-3">
+                <i class="fas fa-headset text-info fa-lg"></i>
+              </div>
+              <div>
+                <h6 class="mb-1 fw-bold">Tiempo de Respuesta</h6>
+                <p class="text-muted mb-0">Usualmente respondemos en menos de 24 horas</p>
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <div class="alert alert-info border-0">
+            <i class="fas fa-lightbulb me-2"></i>
+            <strong>Consejo:</strong> Antes de contactarnos, revisa nuestra 
+            <a href="/faq" class="alert-link">sección de FAQ</a> donde podrías encontrar 
+            respuestas inmediatas a tus preguntas.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{!-- Formulario de contacto --}}
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-gradient-primary text-white py-3"
+             style="background: linear-gradient(45deg, #4e73df, #224abe);">
+          <h5 class="mb-0">
+            <i class="fas fa-paper-plane me-2"></i>Envíanos un Mensaje
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          <form action="/contacto" method="POST" id="contactForm" novalidate>
+            <div class="row g-3">
+              {{!-- Nombre --}}
+              <div class="col-md-6">
+                <label for="name" class="form-label fw-bold">
+                  <i class="fas fa-user me-1 text-primary"></i>Nombre Completo
+                  <span class="text-danger">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control form-control-lg" 
+                  id="name" 
+                  name="name" 
+                  placeholder="Tu nombre completo"
+                  value="{{#if user}}{{user.name}}{{/if}}"
+                  required
+                  minlength="2"
+                  maxlength="100"
+                >
+                <div class="invalid-feedback">
+                  Por favor ingresa tu nombre (mínimo 2 caracteres).
+                </div>
+              </div>
+
+              {{!-- Email --}}
+              <div class="col-md-6">
+                <label for="email" class="form-label fw-bold">
+                  <i class="fas fa-envelope me-1 text-primary"></i>Correo Electrónico
+                  <span class="text-danger">*</span>
+                </label>
+                <input 
+                  type="email" 
+                  class="form-control form-control-lg" 
+                  id="email" 
+                  name="email" 
+                  placeholder="tu@email.com"
+                  value="{{#if user}}{{user.email}}{{/if}}"
+                  required
+                >
+                <div class="invalid-feedback">
+                  Por favor ingresa un correo electrónico válido.
+                </div>
+              </div>
+
+              {{!-- Asunto --}}
+              <div class="col-12">
+                <label for="subject" class="form-label fw-bold">
+                  <i class="fas fa-tag me-1 text-primary"></i>Asunto
+                  <span class="text-danger">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  class="form-control form-control-lg" 
+                  id="subject" 
+                  name="subject" 
+                  placeholder="¿Sobre qué quieres escribirnos?"
+                  required
+                  minlength="3"
+                  maxlength="200"
+                >
+                <div class="invalid-feedback">
+                  Por favor ingresa un asunto (mínimo 3 caracteres).
+                </div>
+              </div>
+
+              {{!-- Mensaje --}}
+              <div class="col-12">
+                <label for="message" class="form-label fw-bold">
+                  <i class="fas fa-comment-dots me-1 text-primary"></i>Mensaje
+                  <span class="text-danger">*</span>
+                </label>
+                <textarea 
+                  class="form-control form-control-lg" 
+                  id="message" 
+                  name="message" 
+                  rows="6" 
+                  placeholder="Escribe tu mensaje aquí..."
+                  required
+                  minlength="10"
+                  maxlength="2000"
+                ></textarea>
+                <div class="form-text">
+                  <span id="charCount">0</span>/2000 caracteres
+                </div>
+                <div class="invalid-feedback">
+                  Por favor ingresa tu mensaje (mínimo 10 caracteres).
+                </div>
+              </div>
+
+              {{!-- Botones --}}
+              <div class="col-12 mt-4">
+                <div class="d-flex gap-2 justify-content-between align-items-center flex-wrap">
+                  <small class="text-muted">
+                    <i class="fas fa-lock me-1"></i>
+                    Tus datos están protegidos y no serán compartidos.
+                  </small>
+                  <div class="d-flex gap-2">
+                    <button type="reset" class="btn btn-outline-secondary">
+                      <i class="fas fa-redo me-1"></i>Limpiar
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-lg px-4">
+                      <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      {{!-- Preguntas frecuentes rápidas --}}
+      <div class="mt-4">
+        <div class="card border-0 bg-light">
+          <div class="card-body">
+            <h6 class="mb-3">
+              <i class="fas fa-question-circle text-primary me-2"></i>
+              ¿Necesitas ayuda rápida?
+            </h6>
+            <div class="row g-2">
+              <div class="col-md-6">
+                <a href="/faq" class="btn btn-sm btn-outline-primary w-100">
+                  <i class="fas fa-book me-1"></i>Ver Preguntas Frecuentes
+                </a>
+              </div>
+              <div class="col-md-6">
+                <a href="/notas" class="btn btn-sm btn-outline-success w-100">
+                  <i class="fas fa-sticky-note me-1"></i>Ir a Mis Notas
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Scripts de validación y contador de caracteres --}}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const messageTextarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+    
+    // Contador de caracteres
+    if (messageTextarea && charCount) {
+      messageTextarea.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+        
+        // Cambiar color si se acerca al límite
+        if (this.value.length > 1800) {
+          charCount.classList.add('text-danger');
+        } else if (this.value.length > 1500) {
+          charCount.classList.add('text-warning');
+          charCount.classList.remove('text-danger');
+        } else {
+          charCount.classList.remove('text-warning', 'text-danger');
+        }
+      });
+    }
+    
+    // Validación del formulario
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        
+        form.classList.add('was-validated');
+      }, false);
+      
+      // Limpiar validación al resetear
+      form.addEventListener('reset', function() {
+        form.classList.remove('was-validated');
+        if (charCount) {
+          charCount.textContent = '0';
+          charCount.classList.remove('text-warning', 'text-danger');
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Efectos de hover en el formulario */
+  .form-control:focus {
+    border-color: #4e73df;
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+  }
+  
+  /* Animación suave para los botones */
+  .btn {
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Estilo para campos inválidos */
+  .was-validated .form-control:invalid {
+    border-color: #e74a3b;
+  }
+  
+  .was-validated .form-control:valid {
+    border-color: #1cc88a;
+  }
+</style>

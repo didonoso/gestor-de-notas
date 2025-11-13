@@ -143,6 +143,112 @@ Antes de ejecutar el proyecto, es necesario configurar las variables de entorno.
     # Configuración para logs
     LOG_LEVEL=info
 
+    # Configuración de correo electrónico (Nodemailer)
+    # Para Gmail: Debes habilitar "Contraseñas de aplicaciones" en tu cuenta de Google
+    # Tutorial: https://support.google.com/accounts/answer/185833
+    EMAIL_USER=tu-email@gmail.com
+    EMAIL_PASS=contraseña-de-16-caracteres-sin-espacios
+   ```
+
+## 📧 Sistema de Contacto Profesional
+
+La aplicación incluye un sistema completo de contacto que permite a los usuarios enviar mensajes directamente desde la aplicación.
+
+### Funcionalidades del Sistema de Contacto
+
+✅ **Formulario de contacto moderno y responsivo**  
+✅ **Validación de datos en cliente y servidor**  
+✅ **Guardado de mensajes en MongoDB** (modelo Contact)  
+✅ **Envío de correos electrónicos** con Nodemailer  
+✅ **Protección anti-spam** (registro de IP y usuario)  
+✅ **Estados de mensajes** (pendiente, leído, respondido)  
+✅ **Página 404 personalizada**  
+
+### 🔧 Configuración de Correo Electrónico
+
+#### Opción 1: Gmail (Recomendado para desarrollo)
+
+1. **Habilita la verificación en 2 pasos** en tu cuenta de Google:
+   - Ve a https://myaccount.google.com/security
+   - Habilita "Verificación en 2 pasos"
+
+2. **Genera una Contraseña de Aplicación**:
+   - Ve a https://myaccount.google.com/apppasswords
+   - Selecciona "Correo" y "Otro (nombre personalizado)"
+   - Escribe "Gestor de Notas" y genera
+   - **Copia la contraseña de 16 caracteres sin espacios**
+
+3. **Configura el archivo `.env`** con tus credenciales reales
+
+#### Opción 2: Otros proveedores
+
+**Outlook/Hotmail:**
+```javascript
+service: 'hotmail'
+```
+
+**Yahoo:**
+```javascript
+service: 'yahoo'
+```
+
+### 📊 Modelo de Base de Datos - Contact
+
+```javascript
+{
+  name: String,        // Nombre del remitente
+  email: String,       // Email del remitente
+  subject: String,     // Asunto del mensaje
+  message: String,     // Contenido del mensaje
+  status: String,      // 'pending' | 'read' | 'replied'
+  userId: ObjectId,    // ID del usuario (si está autenticado)
+  ipAddress: String,   // IP del remitente (seguridad)
+  createdAt: Date,     // Fecha de creación
+  updatedAt: Date      // Fecha de actualización
+}
+```
+
+### 🔍 Visualizar Mensajes de Contacto
+
+Para ver los mensajes guardados en la base de datos, ejecuta:
+
+```bash
+node view-contacts.js
+```
+
+Este script mostrará todos los mensajes de contacto con sus detalles completos.
+
+### 🎨 Rutas del Sistema de Contacto
+
+- **GET** `/contacto` - Muestra el formulario (requiere autenticación)
+- **POST** `/contacto` - Procesa el formulario (requiere autenticación)
+- **GET** `/404` - Página de error 404 personalizada
+
+### ⚠️ Notas Importantes
+
+1. **Seguridad**: Nunca compartas tu archivo `.env` ni subas las credenciales a Git
+2. **Gmail**: Puede bloquear aplicaciones menos seguras. Usa contraseñas de aplicación
+3. **Límites**: Gmail tiene límite de ~500 emails/día
+4. **Producción**: Para producción, considera servicios como SendGrid, Mailgun, AWS SES
+5. **Espacios**: La contraseña de aplicación debe estar sin espacios
+
+### 🐛 Solución de Problemas Comunes
+
+**Error: "Invalid login"**
+- Verifica que usas una contraseña de aplicación (no tu contraseña normal)
+- Confirma que la verificación en 2 pasos está habilitada
+- Asegúrate de que la contraseña no tenga espacios
+
+**No llegan los correos**
+- Revisa la carpeta de spam
+- Verifica las credenciales en `.env`
+- Reinicia el servidor después de cambiar `.env`
+
+**Error de validación**
+- Completa todos los campos del formulario
+- Verifica que el email sea válido
+- El mensaje debe tener mínimo 10 caracteres
+
 ## 🔒 Sistema de Auditoría y Seguridad Avanzado
 
 La aplicación cuenta con un sistema completo y estructurado de registro de actividades que monitorea múltiples aspectos de la interacción del usuario, proporcionando una robusta capa de seguridad y facilitando tanto la detección de posibles accesos no autorizados como el seguimiento de acciones importantes en el sistema.

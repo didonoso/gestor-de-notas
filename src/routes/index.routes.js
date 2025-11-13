@@ -9,7 +9,12 @@ const { Router } = require('express');
 const router = Router();
 
 // Importamos controladores y middleware de autenticación
-const { renderIndex, renderFaq } = require('../controllers/index.controller');
+const { 
+    renderIndex, 
+    renderFaq, 
+    renderContact, 
+    submitContact 
+} = require('../controllers/index.controller');
 const { isAuthenticated } = require('../helpers/auth');
 
 /**
@@ -28,6 +33,24 @@ router.get('/', renderIndex);
  * @middleware isAuthenticated - Verifica que el usuario haya iniciado sesión
  */
 router.get('/faq', isAuthenticated, renderFaq);
+
+/**
+ * Ruta para mostrar el formulario de contacto
+ * @route GET /contacto
+ * @access Private - Requiere autenticación
+ * @description Renderiza la página de contacto con el formulario
+ * @middleware isAuthenticated - Verifica que el usuario haya iniciado sesión
+ */
+router.get('/contacto', isAuthenticated, renderContact);
+
+/**
+ * Ruta para procesar el formulario de contacto
+ * @route POST /contacto
+ * @access Private - Requiere autenticación
+ * @description Procesa el envío del formulario, guarda en BD y envía correo
+ * @middleware isAuthenticated - Verifica que el usuario haya iniciado sesión
+ */
+router.post('/contacto', isAuthenticated, submitContact);
 
 // Exportamos el router para que pueda ser usado en otros archivos
 module.exports = router;

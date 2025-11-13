@@ -357,9 +357,3 @@ Los administradores pueden utilizar esta información para implementar medidas a
 **Diego Donoso Vera**
 
 ---
-
-![Dashboard](https://i.ibb.co/PZKwLZK0/Captura-de-pantalla-2025-09-11-210412.png)
-*Vista de Dashboard con listado de notas y estadísticas de usuario*
-
-![Modo Móvil](https://i.ibb.co/CsKH05Jc/Captura-de-pantalla-2025-09-11-210512.png)
-*Interfaz adaptativa para dispositivos móviles*
